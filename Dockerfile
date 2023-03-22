@@ -6,7 +6,7 @@ FROM ubuntu:20.04
 
 # Install needed packages
 RUN apt update
-RUN apt install -y vim curl wget tmux git
+RUN apt install -y vim curl wget tmux git unzip
 
 # Setup .vimrc
 RUN echo -e \
@@ -69,14 +69,18 @@ RUN apt install -y dotnet-sdk-3.1
 
 # Setup fnm
 RUN curl -fsSL https://fnm.vercel.app/install | bash
-RUN source /root/.bashrc
-RUN fnm install --lts
-RUN fnm use default
+ENV PATH="/root/.local/share/fnm:${PATH}"
+
+# Install Node.js
+ENV NODE_VERSION 18.15.0
+RUN fnm install $NODE_VERSION
+ENV PATH="/root/.local/share/fnm/node-versions/v$NODE_VERSION/installation/bin:${PATH}"
 
 # Install and setup PNPM
 RUN npm i -g pnpm
 ENV PNPM_HOME=/root/.pnpm
 ENV PATH="${PNPM_HOME}:${PATH}"
-
+  
+# Install Angular CLI
 RUN pnpm i -g @angular/cli
 
