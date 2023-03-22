@@ -1,0 +1,13 @@
+<p>hello-world response:</p>
+<pre *ngIf="!!helloWorld">
+  {{ helloWorld }}
+</pre>
+
+<button (click)="postNewHelloWorld()">
+  click for post request
+</button>
+
+<p>post request response</p>
+<pre *ngIf="!!newHelloWorld">
+  {{ newHelloWorld }}
+</pre>

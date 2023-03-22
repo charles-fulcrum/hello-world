@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  project:
+    build: .
+    container_name: dotnet-angular-dev
+    network_mode: 'host'
+    volumes:
+      - .:/root
+    tty: true
+    stdin_open: true
